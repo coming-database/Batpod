@@ -1,0 +1,47 @@
+@import "~@blueprintjs/core/lib/less/variables.less";
+
+.card {
+  padding: 0 !important;
+  height: 250px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.imageCover {
+  height: 100px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e2e2e2;
+}
+
+.desc {
+  padding: 20px;
+}
+
+.releaseDate {
+  padding: 5px 0;
+  text-align: center;
+  width: 100%;
+
+  .icon {
+    margin-right: 10px;
+  }
+}
+
+.actionGroup {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0px;
+  border-top: 1px solid #e2e2e2;
+}
+
+.actionBtn {
+  border-radius: 0 !important;
+  &:first-child {
+    border-right: 1px solid #e2e2e2;
+  }
+}

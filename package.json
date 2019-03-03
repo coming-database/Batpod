@@ -1,0 +1,48 @@
+{
+  "name": "blueprint-pro",
+  "version": "0.0.1",
+  "dependencies": {
+    "@blueprintjs/core": "^3.13.0",
+    "classnames": "^2.2.6",
+    "express": "^4.16.4",
+    "lodash": "^4.17.11",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "react-flexbox-grid": "^2.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-decorators": "^7.1.6",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "clean-webpack-plugin": "^1.0.1",
+    "concurrently": "^4.1.0",
+    "copy-webpack-plugin": "^5.0.0",
+    "css-loader": "^1.0.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "happypack": "^5.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
+    "prettier": "^1.16.4",
+    "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.1.2",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.1",
+    "webpack-merge": "^4.2.1",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --config ./webpack_configs/dev.js",
+    "build": "webpack --config ./webpack_configs/prod.js",
+    "server-build": "webpack --config ./server/webpack.config.js",
+    "server-run": "node ./server/server-build/index.js",
+    "server": "concurrently \"npm:server-build\" \"npm:server-run\""
+  }
+}

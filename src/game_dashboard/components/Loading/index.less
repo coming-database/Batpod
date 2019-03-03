@@ -1,0 +1,15 @@
+@import "~@blueprintjs/core/lib/less/variables.less";
+
+.container {
+  width: 100%;
+  height: 100%; // calc fallback
+  height: calc(100% - @pt-navbar-height);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading {
+  width: 300px !important;
+}
