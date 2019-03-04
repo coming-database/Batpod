@@ -5,14 +5,7 @@ import React from "react";
 import express from "express";
 import ReactDOMServer from "react-dom/server";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return <div>Hello World</div>;
-  }
-}
+import App from "./App";
 
 const PORT = 3006;
 const app = express();
