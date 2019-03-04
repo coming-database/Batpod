@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable */
+import React from 'react'
 import {
   Alignment,
   Button,
@@ -10,19 +11,25 @@ import {
   NavbarHeading,
   Switch,
   InputGroup
-} from "@blueprintjs/core";
-import classNames from "classnames";
+} from '@blueprintjs/core'
+import classNames from 'classnames'
+import './main.css'
 
-import "./main.css";
-import style from "./index.less";
+// import style from './index.less'
+// export default class App extends React.Component {
+//   constructor(props) {
+//     super(props)
+//   }
+//   render() {
+//     return <div>Hello Another World</div>
+//   }
+// }
 
-if (!process.env.BROWSER) {
-  global.window = {}; // Temporarily define window for server-side
-}
+import style from './index.less'
 
 export default class App extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
   render() {
     return (
@@ -32,6 +39,7 @@ export default class App extends React.Component {
             <NavbarHeading>Blueprint</NavbarHeading>
             <NavbarDivider />
             <Button
+              onClick={() => console.log('Click')}
               className={classNames(Classes.MINIMAL, Classes.INTENT_PRIMARY)}
               icon="home"
               text="Home"
@@ -48,6 +56,6 @@ export default class App extends React.Component {
           </NavbarGroup>
         </Navbar>
       </div>
-    );
+    )
   }
 }

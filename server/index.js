@@ -1,31 +1,30 @@
-import path from "path";
-import fs from "fs";
+/* eslint-disable */
+import path from 'path'
+import fs from 'fs'
 
-import React from "react";
-import express from "express";
-import ReactDOMServer from "react-dom/server";
+import React from 'react'
+import express from 'express'
+import ReactDOMServer from 'react-dom/server'
 
-import App from "./App";
+import App from './App'
 
-const PORT = 3006;
-const app = express();
+const PORT = 3006
+const app = express()
 
-app.get("/*", (req, res) => {
-  const app = ReactDOMServer.renderToString(<App />);
+app.get('/*', (req, res) => {
+  const app = ReactDOMServer.renderToString(<App />)
 
-  const indexFile = path.resolve("./server/index.html");
-  fs.readFile(indexFile, "utf8", (err, data) => {
+  const indexFile = path.resolve('./server/index.html')
+  fs.readFile(indexFile, 'utf8', (err, data) => {
     if (err) {
-      console.error("Something went wrong:", err);
-      return res.status(500).send("Oops, better luck next time!");
+      console.error('Something went wrong:', err)
+      return res.status(500).send('Oops, better luck next time!')
     }
 
-    return res.send(
-      data.replace('<div id="app"></div>', `<div id="app">${app}</div>`)
-    );
-  });
-});
+    return res.send(data.replace('<div id="app"></div>', `<div id="app">${app}</div>`))
+  })
+})
 
 app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
-});
+  console.log(`Server is listening on port ${PORT}`)
+})

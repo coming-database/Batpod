@@ -1,20 +1,25 @@
-import React from "react";
+import React from 'react'
 
-import SideMenu from "../SideMenu";
-import Content from "../Content";
-import Nav from "../Nav";
-import Loading from "../Loading";
-import ContentLayout from "../ContentLayout";
-import CardPanel from "../CardPanel";
+import SideMenu from '../SideMenu'
+import Content from '../Content'
+import Nav from '../Nav'
+import Loading from '../Loading'
+import ContentLayout from '../ContentLayout'
+import CardPanel from '../CardPanel'
 
-import "../../common/main.css";
-import layoutStyle from "./layout.less";
+import '../../common/main.css'
+import layoutStyle from './layout.less'
 
 export default class App extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
+    this.state = {
+      sta: 'he'
+    }
   }
+
   render() {
+    const { sta } = this.state
     return (
       <div>
         <Nav />
@@ -26,6 +31,6 @@ export default class App extends React.Component {
           </Content>
         </div>
       </div>
-    );
+    )
   }
 }

@@ -5,3 +5,4 @@ public/**/*.js
 public/**/*.html
 
 server/server-build/**/*.js
+server/server-build/**/*.css
