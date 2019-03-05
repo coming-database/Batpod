@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "@blueprintjs/core": "^3.13.0",
+    "@blueprintjs/select": "^3.7.0",
     "classnames": "^2.2.6",
     "express": "^4.16.4",
     "lodash": "^4.17.11",

@@ -1,13 +1,25 @@
-import React from "react";
-import classNames from "classnames";
-import style from "./index.less";
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import style from './index.less'
 
-export default class AwesomeIcon extends React.Component {
-  constructor(props) {
-    super(props);
+import originIconImage from './origin.png'
+import epicIconImage from './epic.png'
+
+export default function AwesomeIcon(props) {
+  const { type = '' } = props
+
+  if (type.toLowerCase() === 'origin') {
+    return <img alt="origin icon" src={originIconImage} className={style.imageIcon} />
   }
-  render() {
-    const { type } = this.props;
-    return <i className={classNames(`fab fa-${type}`, style.icon)} />;
+
+  if (type.toLowerCase() === 'epic') {
+    return <img alt="epic icon" src={epicIconImage} className={style.imageIcon} />
   }
+
+  return <i className={classNames(`fab fa-${type}`, style.icon)} />
+}
+
+AwesomeIcon.propTypes = {
+  type: PropTypes.string.isRequired
 }

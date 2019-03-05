@@ -9,12 +9,7 @@ import style from './index.less'
 export default function SideMenu() {
   return (
     <Menu className={classNames(Classes.ELEVATION_2, style.menu)}>
-      <MenuDivider title="Platform Filter" />
-      <MenuItem
-        icon={<AwesomeIcon type="steam" />}
-        labelElement={<Switch className={style.filterSwitch} />}
-        text="Steam"
-      />
+      <MenuDivider title="Console Filter" />
       <MenuItem
         icon={<AwesomeIcon type="playstation" />}
         labelElement={<Switch className={style.filterSwitch} />}
@@ -30,13 +25,28 @@ export default function SideMenu() {
         labelElement={<Switch className={style.filterSwitch} />}
         text="Nintendo Switch"
       />
-      <MenuDivider />
-      <MenuItem icon="star" text="Favorites" />
+      <MenuDivider title="PC Filter" />
+      <MenuItem
+        icon={<AwesomeIcon type="steam" />}
+        labelElement={<Switch className={style.filterSwitch} />}
+        text="Steam"
+      />
+      <MenuItem
+        icon={<AwesomeIcon type="origin" />}
+        labelElement={<Switch className={style.filterSwitch} />}
+        text="Origin"
+      />
+      <MenuItem
+        icon={<AwesomeIcon type="epic" />}
+        labelElement={<Switch className={style.filterSwitch} />}
+        text="Epic"
+      />
       <MenuDivider />
       <MenuItem icon="feed-subscribed" text="Subscription" />
       <MenuDivider />
-      <MenuItem icon="help" text="FAQ" />
+      <MenuItem icon="flows" text="Roadmap" />
       <MenuItem icon="envelope" text="Contact" />
+      <MenuItem icon={<AwesomeIcon type="github" />} text="Github" />
     </Menu>
   )
 }
