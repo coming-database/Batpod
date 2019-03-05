@@ -1,0 +1,36 @@
+@import '../../styles/variables.less';
+@import '~@blueprintjs/core/lib/less/variables.less';
+
+.nav {
+  width: 100%;
+  border-radius: 0;
+}
+
+.side {
+  position: relative;
+  width: 100%;
+}
+
+.content {
+  margin-top: 8px;
+  width: 100%;
+  padding: 0 16px;
+}
+
+@media (min-width: @mobileBreakpoint) {
+  .layout {
+    display: flex;
+  }
+
+  .side {
+    width: 250px;
+    min-height: 100%; // calc fallback
+    min-height: calc(100% - @pt-navbar-height); // 100vh fallback
+    min-height: calc(100vh - @pt-navbar-height);
+  }
+
+  .content {
+    flex: 1;
+    margin-top: 0;
+  }
+}

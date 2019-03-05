@@ -6,6 +6,7 @@
     "classnames": "^2.2.6",
     "express": "^4.16.4",
     "lodash": "^4.17.11",
+    "prop-types": "^15.7.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-flexbox-grid": "^2.1.2"
@@ -47,9 +48,6 @@
   },
   "scripts": {
     "start": "webpack-dev-server --config ./webpack_configs/dev.js",
-    "build": "webpack --config ./webpack_configs/prod.js",
-    "server-build": "webpack --config ./server/webpack.config.js",
-    "server-run": "node ./server/server-build/index.js",
-    "server": "concurrently \"npm:server-build\" \"npm:server-run\""
+    "build": "webpack --config ./webpack_configs/prod.js"
   }
 }
