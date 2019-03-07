@@ -22,3 +22,5 @@ Other Refrences:
 
 - Github Hooks
 - Study Firebase CDN and Cache
+- i18n
+- Build Optimize
