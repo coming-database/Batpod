@@ -10,7 +10,8 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
-    "react-flexbox-grid": "^2.1.2"
+    "react-flexbox-grid": "^2.1.2",
+    "react-helmet": "^5.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
@@ -49,6 +50,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --config ./webpack_configs/dev.js",
-    "build": "webpack --config ./webpack_configs/prod.js"
+    "build": "webpack --config ./webpack_configs/prod.js",
+    "deploy": "npm run build && firebase deploy --project comingdb"
   }
 }

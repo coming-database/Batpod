@@ -8,7 +8,7 @@ module.exports = {
     game: paths.GAME_DASHBOARD_ENTRY
   },
   output: {
-    filename: '[name].bundle.js',
+    filename: 'dist/[name].bundle.js',
     path: paths.PUBLIC_DIR,
     publicPath: '/'
   },
