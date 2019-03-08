@@ -20,7 +20,5 @@ Other Refrences:
 
 ## TODO
 
-- Github Hooks
 - Study Firebase CDN and Cache
-- i18n
 - Build Optimize

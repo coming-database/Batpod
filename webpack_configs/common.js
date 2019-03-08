@@ -3,14 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const I18nPlugin = require('i18n-webpack-plugin')
 
 const paths = require('./paths')
-const cnTranslation = require('../languages/cn.json')
+const translation = require('./translation')
 
-const languages = {
-  en: null,
-  cn: cnTranslation
-}
-
-module.exports = Object.keys(languages).map(language => {
+module.exports = function generateCommonConfig(language = translation.langCodes.en) {
   return {
     entry: {
       game: paths.GAME_DASHBOARD_ENTRY
@@ -29,7 +24,7 @@ module.exports = Object.keys(languages).map(language => {
         template: paths.TEMPLATE_HTML,
         filename: `index_${language}.html`
       }),
-      new I18nPlugin(languages[language])
+      new I18nPlugin(translation.languages[language])
     ],
     module: {
       rules: [
@@ -66,4 +61,4 @@ module.exports = Object.keys(languages).map(language => {
       ]
     }
   }
-})
+}

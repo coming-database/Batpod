@@ -6,11 +6,12 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const commonConfigs = require('./common')
+const commongConfigGenerator = require('./common')
+const translation = require('./translation')
 const paths = require('./paths')
 
-module.exports = commonConfigs.map(commonCfg => {
-  return merge(commonCfg, {
+module.exports = Object.keys(translation.langCodes).map(language => {
+  return merge(commongConfigGenerator(language), {
     mode: 'production',
     optimization: {
       minimizer: [
@@ -34,6 +35,9 @@ module.exports = commonConfigs.map(commonCfg => {
         verbose: true
       }),
       new HtmlWebpackPlugin({
+        inject: true,
+        template: paths.TEMPLATE_HTML,
+        filename: `index_${language}.html`,
         minify: {
           removeComments: true,
           collapseWhitespace: true,
