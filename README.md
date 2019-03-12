@@ -4,7 +4,14 @@
 
 ## Table of Contents
 
+- [TODO](#todo)
 - [Intergrate Airbnb Style Guide with ESLint and Prettier](#intergrate-airbnb-style-guide-with-eslint-and-prettier)
+- [Routes Design](#routes-design)
+
+## TODO
+
+- Study Firebase CDN and Cache
+- Optimize module import and build
 
 ## Intergrate Airbnb Style Guide with ESLint and Prettier
 
@@ -18,8 +25,9 @@ Other Refrences:
 
 - [Trouble with react/jsx-one-expression-per-line #1921](https://github.com/yannickcr/eslint-plugin-react/issues/1921)
 
-## TODO
+## Routes Design
 
-- Github Hooks
-- Study Firebase CDN and Cache
-- Optimize module import and build
+- `www.comingdb.com`/`comingdb.com`
+  - `game.comingdb.com`/`comingdb.com/game`/`www.comingdb.com/game`
+  - `movie.comingdb.com`/`comingdb.com/movie`/`www.comingdb.com/movie`
+  - `admin.comingdb.com`/`comingdb.com/admin`/`www.comingdb.com/admin`

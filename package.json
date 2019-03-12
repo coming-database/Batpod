@@ -4,6 +4,7 @@
   "dependencies": {
     "@blueprintjs/core": "^3.13.0",
     "@blueprintjs/select": "^3.7.0",
+    "auth0-js": "^9.10.0",
     "classnames": "^2.2.6",
     "express": "^4.16.4",
     "lodash": "^4.17.11",
@@ -35,9 +36,11 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "happypack": "^5.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "i18n-webpack-plugin": "^1.0.0",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.5.0",
+    "minimist": "^1.2.0",
     "prettier": "^1.16.4",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.1.2",
@@ -49,7 +52,9 @@
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "start": "webpack-dev-server --config ./webpack_configs/dev.js",
+    "dev": "webpack-dev-server --config ./webpack_configs/dev.js",
+    "start:game": "yarn dev --app=game",
+    "start:admin": "yarn dev --app=admin",
     "build": "webpack --config ./webpack_configs/prod.js",
     "deploy": "npm run build && firebase deploy --project comingdb"
   }

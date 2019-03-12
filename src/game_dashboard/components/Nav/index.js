@@ -30,6 +30,9 @@ export default function Nav() {
         </NavbarGroup>
         <NavbarGroup align={Alignment.RIGHT}>
           <InputGroup />
+          <NavbarDivider />
+          <Button className={classNames(Classes.MINIMAL)} icon="user" />
+          <Button className={classNames(Classes.MINIMAL)} icon="globe" />
         </NavbarGroup>
       </Navbar>
     </div>

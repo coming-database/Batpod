@@ -1,5 +1,9 @@
 node_modules
 .vscode
+public/**/*.js
+public/**/*.css
+public/**/*.html
+
 
 # Logs
 logs

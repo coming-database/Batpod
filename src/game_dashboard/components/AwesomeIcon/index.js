@@ -7,7 +7,7 @@ import originIconImage from './origin.png'
 import epicIconImage from './epic.png'
 
 export default function AwesomeIcon(props) {
-  const { type = '' } = props
+  const { type = '', prefix = 'fab' } = props
 
   if (type.toLowerCase() === 'origin') {
     return <img alt="origin icon" src={originIconImage} className={style.imageIcon} />
@@ -17,9 +17,10 @@ export default function AwesomeIcon(props) {
     return <img alt="epic icon" src={epicIconImage} className={style.imageIcon} />
   }
 
-  return <i className={classNames(`fab fa-${type}`, style.icon)} />
+  return <i className={classNames(`${prefix} fa-${type}`, style.icon)} />
 }
 
 AwesomeIcon.propTypes = {
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
+  prefix: PropTypes.string
 }

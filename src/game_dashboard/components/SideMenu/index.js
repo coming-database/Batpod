@@ -9,7 +9,7 @@ import style from './index.less'
 export default function SideMenu() {
   return (
     <Menu className={classNames(Classes.ELEVATION_2, style.menu)}>
-      <MenuDivider title="Console Filter" />
+      <MenuDivider title={__('Console Filter')} />
       <MenuItem
         icon={<AwesomeIcon type="playstation" />}
         labelElement={<Switch className={style.filterSwitch} />}
@@ -25,7 +25,7 @@ export default function SideMenu() {
         labelElement={<Switch className={style.filterSwitch} />}
         text="Nintendo Switch"
       />
-      <MenuDivider title="PC Filter" />
+      <MenuDivider title={__('PC Filter')} />
       <MenuItem
         icon={<AwesomeIcon type="steam" />}
         labelElement={<Switch className={style.filterSwitch} />}
@@ -42,10 +42,12 @@ export default function SideMenu() {
         text="Epic"
       />
       <MenuDivider />
-      <MenuItem icon="feed-subscribed" text="Subscription" />
+      <MenuItem icon={<AwesomeIcon prefix="fas" type="fighter-jet" />} text={__('Type')} />
       <MenuDivider />
-      <MenuItem icon="flows" text="Roadmap" />
-      <MenuItem icon="envelope" text="Contact" />
+      <MenuItem icon="feed-subscribed" text={__('Subscription')} />
+      <MenuDivider />
+      <MenuItem icon="flows" text={__('Roadmap')} />
+      <MenuItem icon="envelope" text={__('Contact')} />
       <MenuItem icon={<AwesomeIcon type="github" />} text="Github" />
     </Menu>
   )
