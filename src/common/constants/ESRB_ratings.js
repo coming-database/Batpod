@@ -1,0 +1,10 @@
+const ratings = {
+  EVERYONE: 'EVERYONE',
+  EVERYONE_10_PLUS: 'EVERYONE 10+',
+  TEEN: 'TEEN',
+  MATURE: 'MATURE',
+  ADULTS_ONLY: 'ADULTS ONLY',
+  RATING_PENDING: 'RATING PENDING'
+}
+
+export default ratings

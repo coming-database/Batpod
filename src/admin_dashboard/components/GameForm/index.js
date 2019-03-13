@@ -12,10 +12,13 @@ import {
   Switch,
   Tab,
   Tabs,
-  Popover
+  Popover,
+  MenuItem
 } from '@blueprintjs/core'
+import { ItemRenderer, MultiSelect, Select } from '@blueprintjs/select'
 import { inject, observer } from 'mobx-react'
 
+import RatingSelect from '../RatingSelect'
 import style from './index.less'
 
 const TABS = {
@@ -63,6 +66,46 @@ export default class GameForm extends React.Component {
                   </FormGroup>
                   <FormGroup label="Release Date" labelFor="release-input">
                     <InputGroup id="release-input" />
+                  </FormGroup>
+                  <FormGroup label="Select" labelFor="category-select">
+                    <RatingSelect />
+                    {/* <MultiSelect
+                      className={style.multi}
+                      items={[
+                        { title: 'The Shawshank Redemption', year: 1994 },
+                        { title: 'The Godfather', year: 1972 },
+                        { title: 'The Godfather: Part II', year: 1974 }
+                      ]}
+                      itemRenderer={(item, index) => {
+                        return (
+                          <MenuItem
+                            key={item.title}
+                            label={item.year.toString()}
+                            text={`${item.title}`}
+                            shouldDismissPopover={false}
+                          />
+                        )
+                      }}
+                      tagRenderer={item => {
+                        console.log(item)
+                        return <li>Hello</li>
+                      }}
+                      id="category-select"
+                    /> */}
+                    {/* <Select
+                      items={[
+                        { title: 'The Shawshank Redemption', year: 1994 },
+                        { title: 'The Godfather', year: 1972 },
+                        { title: 'The Godfather: Part II', year: 1974 }
+                      ]}
+                      itemRenderer={item => {
+                        console.log(item)
+                        return <li>Hello</li>
+                      }}
+                      id="category-select"
+                    >
+                      <Button>Trigger</Button>
+                    </Select> */}
                   </FormGroup>
                 </div>
               }
