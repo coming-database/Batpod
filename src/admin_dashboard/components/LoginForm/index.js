@@ -1,8 +1,11 @@
 import React from 'react'
-import { FormGroup, InputGroup, Card, Elevation, Button, Intent } from '@blueprintjs/core'
+import { inject, observer } from 'mobx-react'
+import { FormGroup, InputGroup, Card, Elevation, Button, Intent, Switch } from '@blueprintjs/core'
 
 import style from './index.less'
 
+@inject('user')
+@observer
 export default class LoginForm extends React.Component {
   constructor(props) {
     super(props)
@@ -11,13 +14,23 @@ export default class LoginForm extends React.Component {
       password: ''
     }
   }
-
+  loginHandler = () => {
+    const {
+      user: { login }
+    } = this.props
+    const { email, password } = this.state
+    login(email, password)
+  }
   render() {
     const { email, password } = this.state
+    const {
+      user: { isLogining }
+    } = this.props
     return (
       <Card elevation={Elevation.TWO} className={style.loginForm}>
         <FormGroup label="Email" labelFor="email-input">
           <InputGroup
+            disabled={isLogining}
             onChange={e =>
               this.setState({
                 email: e.target.value
@@ -30,6 +43,7 @@ export default class LoginForm extends React.Component {
         </FormGroup>
         <FormGroup label="Password" labelFor="password-input">
           <InputGroup
+            disabled={isLogining}
             onChange={e =>
               this.setState({
                 password: e.target.value
@@ -42,15 +56,11 @@ export default class LoginForm extends React.Component {
         </FormGroup>
         <FormGroup>
           <Button
-            onClick={() => {
-              firebase
-                .auth()
-                .signInWithEmailAndPassword(email, password)
-                .catch(error => {
-                  console.log(error)
-                })
-            }}
+            disabled={isLogining}
+            loading={isLogining}
+            onClick={this.loginHandler}
             intent={Intent.PRIMARY}
+            type="submit"
           >
             Login
           </Button>

@@ -1,34 +1,47 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
+import { inject, observer } from 'mobx-react'
+
 import LoginForm from '../LoginForm'
+import GameList from '../GameList'
+import Layout from '../Layout'
+import Loading from '../../../common/components/Loading'
 
 import '../../../common/styles/main.css'
 
-firebase.auth().onAuthStateChanged(user => {
-  if (user) {
-    console.log(user)
-  } else {
-    // // User is signed in.
-    // var displayName = user.displayName;
-    // var email = user.email;
-    // var emailVerified = user.emailVerified;
-    // var photoURL = user.photoURL;
-    // var isAnonymous = user.isAnonymous;
-    // var uid = user.uid;
-    // var providerData = user.providerData;
+@inject('user')
+@observer
+export default class App extends React.Component {
+  constructor(props) {
+    super(props)
   }
-})
+  render() {
+    const {
+      user: { email, isInitialLoginChecking }
+    } = this.props
 
-export default function App() {
-  return (
-    <div>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>Admin</title>
-      </Helmet>
-      <div>
-        <LoginForm />
-      </div>
-    </div>
-  )
+    return (
+      <Layout>
+        <GameList />
+      </Layout>
+    )
+
+    if (isInitialLoginChecking) {
+      return (
+        <Layout>
+          <Loading />
+        </Layout>
+      )
+    }
+
+    if (!email) {
+      return <LoginForm />
+    }
+
+    return (
+      <Layout>
+        <GameList />
+      </Layout>
+    )
+  }
 }

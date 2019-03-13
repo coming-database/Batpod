@@ -17,6 +17,7 @@
   },
   "globals": {
     "__": true,
-    "firebase": true
+    "firebase": true,
+    "window": true
   }
 }
