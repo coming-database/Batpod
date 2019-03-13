@@ -43,7 +43,6 @@ export default class LoginForm extends React.Component {
         <FormGroup>
           <Button
             onClick={() => {
-              console.log('CLICK')
               firebase
                 .auth()
                 .signInWithEmailAndPassword(email, password)
