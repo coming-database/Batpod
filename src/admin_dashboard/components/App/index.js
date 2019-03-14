@@ -20,12 +20,6 @@ export default class App extends React.Component {
       user: { email, isInitialLoginChecking }
     } = this.props
 
-    return (
-      <Layout>
-        <GameList />
-      </Layout>
-    )
-
     if (isInitialLoginChecking) {
       return (
         <Layout>

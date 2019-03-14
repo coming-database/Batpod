@@ -19,7 +19,7 @@ import {
 import { ItemRenderer, MultiSelect, Select } from '@blueprintjs/select'
 import { inject, observer } from 'mobx-react'
 
-import RatingSelect from '../RatingSelect'
+import ImageUploader from '../ImageUploader'
 import style from './index.less'
 
 const TABS = {
@@ -35,6 +35,14 @@ export default class GameForm extends React.Component {
     this.state = {
       activeTab: TABS.BASIC
     }
+
+    // const storage = firebase.storage()
+    // const storageRef = storage.ref()
+
+    // const appleRef = storageRef.child('images/apple.png')
+    // appleRef.getDownloadURL().then(url => {
+    //   document.querySelector('img').setAttribute('src', url)
+    // })
   }
   render() {
     const { activeTab } = this.state
@@ -59,8 +67,8 @@ export default class GameForm extends React.Component {
                   <FormGroup label="Name" labelFor="name-input">
                     <InputGroup id="name-input" />
                   </FormGroup>
-                  <FormGroup label="Cover Image" labelFor="cover-upload">
-                    <FileInput id="cover-upload" text="Choose file..." />
+                  <FormGroup label="Cover Image">
+                    <ImageUploader />
                   </FormGroup>
                   <FormGroup label="Price" labelFor="price-input">
                     <InputGroup id="price-input" text="Choose file..." />

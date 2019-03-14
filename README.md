@@ -7,11 +7,13 @@
 - [TODO](#todo)
 - [Intergrate Airbnb Style Guide with ESLint and Prettier](#intergrate-airbnb-style-guide-with-eslint-and-prettier)
 - [Routes Design](#routes-design)
+- [Security](#security)
 
 ## TODO
 
 - Study Firebase CDN and Cache
 - Optimize module import and build
+- Share ESLints
 
 ## Intergrate Airbnb Style Guide with ESLint and Prettier
 
@@ -31,3 +33,9 @@ Other Refrences:
   - `game.comingdb.com`/`comingdb.com/game`/`www.comingdb.com/game`
   - `movie.comingdb.com`/`comingdb.com/movie`/`www.comingdb.com/movie`
   - `admin.comingdb.com`/`comingdb.com/admin`/`www.comingdb.com/admin`
+
+## Security
+
+- [Do you need to hide your Firebase API keys for Ionic apps?](https://javebratt.com/hide-firebase-api/)
+- [Is it safe to expose Firebase apiKey to the public?](https://stackoverflow.com/questions/37482366/is-it-safe-to-expose-firebase-apikey-to-the-public)
+- [How to restrict Firebase data modification?](https://stackoverflow.com/questions/35418143/how-to-restrict-firebase-data-modification)
