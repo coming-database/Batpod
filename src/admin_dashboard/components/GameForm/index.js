@@ -13,7 +13,8 @@ import {
   Tab,
   Tabs,
   Popover,
-  MenuItem
+  MenuItem,
+  TextArea
 } from '@blueprintjs/core'
 import { ItemRenderer, MultiSelect, Select } from '@blueprintjs/select'
 import { inject, observer } from 'mobx-react'
@@ -67,46 +68,6 @@ export default class GameForm extends React.Component {
                   <FormGroup label="Release Date" labelFor="release-input">
                     <InputGroup id="release-input" />
                   </FormGroup>
-                  <FormGroup label="Select" labelFor="category-select">
-                    <RatingSelect />
-                    {/* <MultiSelect
-                      className={style.multi}
-                      items={[
-                        { title: 'The Shawshank Redemption', year: 1994 },
-                        { title: 'The Godfather', year: 1972 },
-                        { title: 'The Godfather: Part II', year: 1974 }
-                      ]}
-                      itemRenderer={(item, index) => {
-                        return (
-                          <MenuItem
-                            key={item.title}
-                            label={item.year.toString()}
-                            text={`${item.title}`}
-                            shouldDismissPopover={false}
-                          />
-                        )
-                      }}
-                      tagRenderer={item => {
-                        console.log(item)
-                        return <li>Hello</li>
-                      }}
-                      id="category-select"
-                    /> */}
-                    {/* <Select
-                      items={[
-                        { title: 'The Shawshank Redemption', year: 1994 },
-                        { title: 'The Godfather', year: 1972 },
-                        { title: 'The Godfather: Part II', year: 1974 }
-                      ]}
-                      itemRenderer={item => {
-                        console.log(item)
-                        return <li>Hello</li>
-                      }}
-                      id="category-select"
-                    >
-                      <Button>Trigger</Button>
-                    </Select> */}
-                  </FormGroup>
                 </div>
               }
             />
@@ -118,11 +79,11 @@ export default class GameForm extends React.Component {
                   <FormGroup label="Developer" labelFor="developer-input">
                     <InputGroup id="developer-input" />
                   </FormGroup>
-                  <FormGroup label="Category" labelFor="category  -input">
-                    <InputGroup id="category  -input" />
-                  </FormGroup>
                   <FormGroup label="Publisher" labelFor="publisher-input">
                     <InputGroup id="publisher-input" />
+                  </FormGroup>
+                  <FormGroup label="Category" labelFor="category  -input">
+                    <InputGroup id="category-input" />
                   </FormGroup>
                   <FormGroup label="Age Rating" labelFor="age-input">
                     <InputGroup id="age-input" />
@@ -130,7 +91,30 @@ export default class GameForm extends React.Component {
                 </div>
               }
             />
-            <Tab id={TABS.PLATFORMS} title="Platforms" />
+            <Tab
+              id={TABS.PLATFORMS}
+              title="Platforms"
+              panel={
+                <div>
+                  <TextArea
+                    large={true}
+                    intent={Intent.PRIMARY}
+                    className={style.platforms}
+                    placeholder={JSON.stringify(
+                      [
+                        {
+                          platform: '',
+                          sku: '',
+                          url: ''
+                        }
+                      ],
+                      null,
+                      4
+                    )}
+                  />
+                </div>
+              }
+            />
           </Tabs>
           <div>
             <ButtonGroup>
