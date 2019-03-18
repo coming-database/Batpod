@@ -12,7 +12,8 @@ import {
   Tab,
   Tabs,
   TextArea,
-  Tag
+  Tag,
+  Switch
 } from '@blueprintjs/core'
 import { ItemRenderer, MultiSelect, Select } from '@blueprintjs/select'
 import { inject, observer } from 'mobx-react'
@@ -47,7 +48,11 @@ export default class GameForm extends React.Component {
   }
   inputChangeHandler(property, e) {
     const { store } = this.props
-    set(store, property, e.target.value)
+    set(store, property, e.target.checked || e.target.value)
+  }
+  onlineSwitchChangeHandler = e => {
+    const { store } = this.props
+    set(store, 'online', e.target.checked)
   }
   coverImageChangeHandler = url => {
     const {
@@ -60,6 +65,7 @@ export default class GameForm extends React.Component {
     const { activeTab } = this.state
 
     const {
+      online,
       name,
       coverUrl,
       price,
@@ -73,7 +79,10 @@ export default class GameForm extends React.Component {
       ageRating,
       otherInfoFilledCondition,
 
-      platforms
+      platforms,
+      create,
+      edit,
+      deleteGame
     } = store
     return (
       <div>
@@ -200,18 +209,18 @@ export default class GameForm extends React.Component {
               }
             />
           </Tabs>
-          <div>
+          <div className={style.actionGroup}>
+            <Switch
+              onChange={this.onlineSwitchChangeHandler}
+              checked={online}
+              label="Online"
+              className={style.onlineSwitch}
+            />
             <ButtonGroup>
-              <Button icon="tick-circle" intent={Intent.PRIMARY}>
-                Go Online
-              </Button>
-              <Button icon="delete" intent={Intent.PRIMARY}>
-                Go Offline
-              </Button>
               <Button icon="trash" intent={Intent.DANGER}>
                 Delete
               </Button>
-              <Button icon="saved" intent={Intent.PRIMARY}>
+              <Button onClick={create} icon="saved" intent={Intent.PRIMARY}>
                 Save
               </Button>
             </ButtonGroup>

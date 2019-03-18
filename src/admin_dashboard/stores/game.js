@@ -6,6 +6,7 @@ function checkFilledCount(values) {
 }
 
 export default class Game {
+  @observable online = false
   @observable name = ''
   @observable coverUrl = ''
   @observable price = ''
@@ -40,8 +41,13 @@ export default class Game {
   }
 
   @observable platforms = {}
+  @computed
+  get supportedPlatforms() {
+    return Object.keys(this.platforms)
+  }
 
   constructor() {
+    this.db = firebase.firestore()
     this.uploadedCoverImageUrls = []
   }
 
@@ -54,8 +60,25 @@ export default class Game {
   }
 
   @action
-  createGame = () => {}
+  create = () => {
+    this.db
+      .collection('users')
+      .add({
+        first: 'Ada',
+        last: 'Lovelace',
+        born: 1815
+      })
+      .then(function(docRef) {
+        console.log('Document written with ID: ', docRef.id)
+      })
+      .catch(function(error) {
+        console.error('Error adding document: ', error)
+      })
+  }
 
   @action
-  editGame = () => {}
+  edit = () => {}
+
+  @action
+  deleteGame = () => {}
 }
