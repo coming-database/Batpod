@@ -1,4 +1,6 @@
 import React from 'react'
+import { set } from 'mobx'
+import { mapProps } from 'recompose'
 import {
   FormGroup,
   ButtonGroup,
@@ -7,18 +9,16 @@ import {
   Elevation,
   Button,
   Intent,
-  FileInput,
-  Divider,
-  Switch,
   Tab,
   Tabs,
-  Popover,
-  MenuItem,
-  TextArea
+  TextArea,
+  Tag
 } from '@blueprintjs/core'
 import { ItemRenderer, MultiSelect, Select } from '@blueprintjs/select'
 import { inject, observer } from 'mobx-react'
 
+import withMobx from '../../../common/hocs/withMobx'
+import GameStore from '../../stores/game'
 import ImageUploader from '../ImageUploader'
 import style from './index.less'
 
@@ -28,6 +28,15 @@ const TABS = {
   PLATFORMS: 'PLATFORMS'
 }
 
+const FilledTag = ({ filledCount, totalCount }) => {
+  return (
+    <Tag intent={filledCount === totalCount ? Intent.SUCCESS : Intent.DANGER}>
+      {filledCount} / {totalCount}
+    </Tag>
+  )
+}
+
+@withMobx(new GameStore())
 @observer
 export default class GameForm extends React.Component {
   constructor(props) {
@@ -35,17 +44,31 @@ export default class GameForm extends React.Component {
     this.state = {
       activeTab: TABS.BASIC
     }
-
-    // const storage = firebase.storage()
-    // const storageRef = storage.ref()
-
-    // const appleRef = storageRef.child('images/apple.png')
-    // appleRef.getDownloadURL().then(url => {
-    //   document.querySelector('img').setAttribute('src', url)
-    // })
+  }
+  inputChangeHandler(property, e) {
+    const { store } = this.props
+    set(store, property, e.target.value)
   }
   render() {
+    const { store } = this.props
     const { activeTab } = this.state
+
+    const {
+      name,
+      coverUrl,
+      price,
+      region,
+      releaseDate,
+      basicInfoFilledCondition,
+
+      developer,
+      distributor,
+      categories,
+      ageRating,
+      otherInfoFilledCondition,
+
+      platforms
+    } = store
     return (
       <div>
         <Card className={style.gameForm} elevation={Elevation.TWO}>
@@ -61,61 +84,111 @@ export default class GameForm extends React.Component {
           >
             <Tab
               id={TABS.BASIC}
-              title="Basic"
+              title={
+                <span>
+                  <span>Basic </span>
+                  <FilledTag
+                    filledCount={basicInfoFilledCondition.filledCount}
+                    totalCount={basicInfoFilledCondition.totalCount}
+                  />
+                </span>
+              }
               panel={
                 <div className={style.tabContent}>
                   <FormGroup label="Name" labelFor="name-input">
-                    <InputGroup id="name-input" />
+                    <InputGroup
+                      onChange={this.inputChangeHandler.bind(this, 'name')}
+                      value={name}
+                      id="name-input"
+                    />
                   </FormGroup>
                   <FormGroup label="Cover Image">
-                    <ImageUploader />
+                    <ImageUploader
+                      onChange={this.inputChangeHandler.bind(this, 'coverUrl')}
+                      value={coverUrl}
+                    />
+                  </FormGroup>
+                  <FormGroup label="Region" labelFor="region-input">
+                    <InputGroup value={region} id="region-input" disabled />
                   </FormGroup>
                   <FormGroup label="Price" labelFor="price-input">
-                    <InputGroup id="price-input" text="Choose file..." />
+                    <InputGroup
+                      onChange={this.inputChangeHandler.bind(this, 'price')}
+                      value={price}
+                      id="price-input"
+                    />
                   </FormGroup>
                   <FormGroup label="Release Date" labelFor="release-input">
-                    <InputGroup id="release-input" />
+                    <InputGroup
+                      onChange={this.inputChangeHandler.bind(this, 'releaseDate')}
+                      value={releaseDate}
+                      id="release-input"
+                    />
                   </FormGroup>
                 </div>
               }
             />
             <Tab
               id={TABS.OTHER}
-              title="Other"
+              title={
+                <span>
+                  <span>Other</span>
+                  <FilledTag
+                    filledCount={otherInfoFilledCondition.filledCount}
+                    totalCount={otherInfoFilledCondition.totalCount}
+                  />
+                </span>
+              }
               panel={
                 <div className={style.tabContent}>
                   <FormGroup label="Developer" labelFor="developer-input">
-                    <InputGroup id="developer-input" />
+                    <InputGroup
+                      onChange={this.inputChangeHandler.bind(this, 'developer')}
+                      value={developer}
+                      id="developer-input"
+                    />
                   </FormGroup>
-                  <FormGroup label="Publisher" labelFor="publisher-input">
-                    <InputGroup id="publisher-input" />
+                  <FormGroup label="Distributor" labelFor="distributor-input">
+                    <InputGroup
+                      onChange={this.inputChangeHandler.bind(this, 'distributor')}
+                      value={distributor}
+                      id="distributor-input"
+                    />
                   </FormGroup>
-                  <FormGroup label="Category" labelFor="category  -input">
-                    <InputGroup id="category-input" />
+                  <FormGroup label="Category" labelFor="category-input">
+                    <InputGroup
+                      onChange={this.inputChangeHandler.bind(this, 'categories')}
+                      value={categories}
+                      id="category-input"
+                    />
                   </FormGroup>
                   <FormGroup label="Age Rating" labelFor="age-input">
-                    <InputGroup id="age-input" />
+                    <InputGroup
+                      onChange={this.inputChangeHandler.bind(this, 'ageRating')}
+                      value={ageRating}
+                      id="age-input"
+                    />
                   </FormGroup>
                 </div>
               }
             />
             <Tab
               id={TABS.PLATFORMS}
-              title="Platforms"
+              title={<span>Platforms</span>}
               panel={
                 <div>
                   <TextArea
                     large={true}
                     intent={Intent.PRIMARY}
                     className={style.platforms}
+                    onChange={this.inputChangeHandler.bind(this, 'platforms')}
                     placeholder={JSON.stringify(
-                      [
-                        {
-                          platform: '',
+                      {
+                        steam: {
                           sku: '',
                           url: ''
                         }
-                      ],
+                      },
                       null,
                       4
                     )}

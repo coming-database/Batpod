@@ -8,6 +8,7 @@ import Layout from '../Layout'
 import Loading from '../../../common/components/Loading'
 
 import '../../../common/styles/main.css'
+import style from './index.less'
 
 @inject('user')
 @observer
@@ -23,7 +24,9 @@ export default class App extends React.Component {
     if (isInitialLoginChecking) {
       return (
         <Layout>
-          <Loading />
+          <div className={style.loadingContainer}>
+            <Loading />
+          </div>
         </Layout>
       )
     }

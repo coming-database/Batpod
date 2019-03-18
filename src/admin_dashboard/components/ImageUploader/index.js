@@ -8,12 +8,14 @@ export default class ImageUploader extends React.Component {
     this.storageRef = firebase.storage().ref()
   }
   fileChangeHandler = event => {
+    const { onChange = new Function() } = this.props
     const selectedFile = event.target.files[0]
     const ext = selectedFile.name.split('.')[1]
     const uploadTask = this.storageRef.child(`images/${uuidv4()}.${ext}`).put(selectedFile)
     uploadTask
       .then(snapshot => snapshot.ref.getDownloadURL())
       .then(url => {
+        onChange(url)
         Toaster.create().show({
           intent: Intent.SUCCESS,
           message: 'Upload Success'
