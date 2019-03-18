@@ -49,6 +49,12 @@ export default class GameForm extends React.Component {
     const { store } = this.props
     set(store, property, e.target.value)
   }
+  coverImageChangeHandler = url => {
+    const {
+      store: { updateCoverUrl }
+    } = this.props
+    updateCoverUrl(url)
+  }
   render() {
     const { store } = this.props
     const { activeTab } = this.state
@@ -103,10 +109,7 @@ export default class GameForm extends React.Component {
                     />
                   </FormGroup>
                   <FormGroup label="Cover Image">
-                    <ImageUploader
-                      onChange={this.inputChangeHandler.bind(this, 'coverUrl')}
-                      value={coverUrl}
-                    />
+                    <ImageUploader onChange={this.coverImageChangeHandler} value={coverUrl} />
                   </FormGroup>
                   <FormGroup label="Region" labelFor="region-input">
                     <InputGroup value={region} id="region-input" disabled />

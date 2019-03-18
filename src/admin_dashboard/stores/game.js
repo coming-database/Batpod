@@ -42,6 +42,20 @@ export default class Game {
   @observable platforms = {}
 
   constructor() {
-    this.uploadedImageUrls = []
+    this.uploadedCoverImageUrls = []
   }
+
+  @action
+  updateCoverUrl = url => {
+    if (this.coverUrl) {
+      this.uploadedCoverImageUrls.push(this.coverUrl)
+    }
+    this.coverUrl = url
+  }
+
+  @action
+  createGame = () => {}
+
+  @action
+  editGame = () => {}
 }

@@ -29,6 +29,7 @@ export default class ImageUploader extends React.Component {
       })
   }
   render() {
-    return <FileInput text="Choose file..." onInputChange={this.fileChangeHandler} />
+    const { value = 'Choose file...' } = this.props
+    return <FileInput text={value} onInputChange={this.fileChangeHandler} />
   }
 }
