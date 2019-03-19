@@ -4904,6 +4904,13 @@ schema-utils@^1.0.0:
     ajv-errors "^1.0.0"
     ajv-keywords "^3.1.0"
 
+schemaor@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/schemaor/-/schemaor-0.0.7.tgz#afb018ac74a9c6f7542b57a1240641ad0e446f5a"
+  integrity sha512-3ewPrhU1hJeqJgI5IdZbUagKAF5i0O3JHSy5BfatF6b/p6J49EWS4/pRd4yjWYCVemgoU4NeEObMB3lYFx/slg==
+  dependencies:
+    lodash "^4.17.11"
+
 select-hose@^2.0.0:
   version "2.0.0"
   resolved "http://registry.npm.taobao.org/select-hose/download/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"

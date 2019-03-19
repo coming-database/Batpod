@@ -24,3 +24,7 @@ AwesomeIcon.propTypes = {
   type: PropTypes.string.isRequired,
   prefix: PropTypes.string
 }
+
+AwesomeIcon.defaultProps = {
+  prefix: ''
+}

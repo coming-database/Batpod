@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { set } from 'mobx'
 import {
   FormGroup,
@@ -17,6 +18,7 @@ import {
 import { observer } from 'mobx-react'
 
 import withMobx from '../../../common/hocs/withMobx'
+import FilledTag from '../FilledTag'
 import GameStore from '../../stores/game'
 import ImageUploader from '../ImageUploader'
 import OverlayLoading from '../../../common/components/OverlayLoading'
@@ -28,14 +30,6 @@ const TABS = {
   PLATFORMS: 'PLATFORMS'
 }
 
-const FilledTag = ({ filledCount, totalCount }) => {
-  return (
-    <Tag intent={filledCount === totalCount ? Intent.SUCCESS : Intent.DANGER}>
-      {filledCount} / {totalCount}
-    </Tag>
-  )
-}
-
 @withMobx(new GameStore())
 @observer
 export default class GameForm extends React.Component {
@@ -45,25 +39,31 @@ export default class GameForm extends React.Component {
       activeTab: TABS.BASIC
     }
   }
+
   inputChangeHandler(property, e) {
     const { store } = this.props
     set(store, property, e.target.checked || e.target.value)
   }
+
   onlineSwitchChangeHandler = e => {
     const { store } = this.props
     set(store, 'online', e.target.checked)
   }
+
   coverImageChangeHandler = url => {
     const {
       store: { updateCoverUrl }
     } = this.props
     updateCoverUrl(url)
   }
+
   render() {
     const { store } = this.props
     const { activeTab } = this.state
 
     const {
+      loading,
+
       online,
       name,
       coverUrl,
@@ -82,7 +82,7 @@ export default class GameForm extends React.Component {
     } = store
     return (
       <div>
-        <OverlayLoading />
+        <OverlayLoading isOpen={loading} />
         <Card className={style.gameForm} elevation={Elevation.TWO}>
           <Tabs
             className={style.tabs}
@@ -226,4 +226,8 @@ export default class GameForm extends React.Component {
       </div>
     )
   }
+}
+
+GameForm.propTypes = {
+  store: PropTypes.object.isRequired
 }
