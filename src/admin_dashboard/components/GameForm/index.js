@@ -1,6 +1,5 @@
 import React from 'react'
 import { set } from 'mobx'
-import { mapProps } from 'recompose'
 import {
   FormGroup,
   ButtonGroup,
@@ -15,12 +14,12 @@ import {
   Tag,
   Switch
 } from '@blueprintjs/core'
-import { ItemRenderer, MultiSelect, Select } from '@blueprintjs/select'
-import { inject, observer } from 'mobx-react'
+import { observer } from 'mobx-react'
 
 import withMobx from '../../../common/hocs/withMobx'
 import GameStore from '../../stores/game'
 import ImageUploader from '../ImageUploader'
+import OverlayLoading from '../../../common/components/OverlayLoading'
 import style from './index.less'
 
 const TABS = {
@@ -79,13 +78,11 @@ export default class GameForm extends React.Component {
       ageRating,
       otherInfoFilledCondition,
 
-      platforms,
-      create,
-      edit,
-      deleteGame
+      create
     } = store
     return (
       <div>
+        <OverlayLoading />
         <Card className={style.gameForm} elevation={Elevation.TWO}>
           <Tabs
             className={style.tabs}
