@@ -1,8 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import uuidv4 from 'uuid/v4'
+import { FileInput } from '@blueprintjs/core'
 
+import toaster from '../../../common/util/toaster'
 import OverlayLoading from '../../../common/components/OverlayLoading'
-import { FileInput, Toaster, Intent } from '@blueprintjs/core'
 
 export default class ImageUploader extends React.Component {
   constructor(props) {
@@ -12,8 +14,9 @@ export default class ImageUploader extends React.Component {
       loading: false
     }
   }
+
   fileChangeHandler = event => {
-    const { onChange = new Function() } = this.props
+    const { onChange } = this.props
     const selectedFile = event.target.files[0]
     const ext = selectedFile.name.split('.')[1]
     const uploadTask = this.storageRef.child(`images/${uuidv4()}.${ext}`).put(selectedFile)
@@ -24,24 +27,19 @@ export default class ImageUploader extends React.Component {
       .then(snapshot => snapshot.ref.getDownloadURL())
       .then(url => {
         onChange(url)
-        Toaster.create().show({
-          intent: Intent.SUCCESS,
-          message: 'Upload Success'
-        })
+        toaster.success('Upload Success')
         this.setState({
           loading: false
         })
       })
       .catch(error => {
-        Toaster.create().show({
-          intent: Intent.DANGER,
-          message: `Upload Failed: ${error.message}`
-        })
+        toaster.error(`Upload Failed: ${error.message}`)
         this.setState({
           loading: false
         })
       })
   }
+
   render() {
     const { loading } = this.state
     const { value = 'Choose file...' } = this.props
@@ -56,4 +54,12 @@ export default class ImageUploader extends React.Component {
       </div>
     )
   }
+}
+
+ImageUploader.propTypes = {
+  onChange: PropTypes.func
+}
+
+ImageUploader.defaultProps = {
+  onChange: function anonymous() {}
 }

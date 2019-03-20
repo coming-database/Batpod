@@ -1,85 +1,50 @@
 import React from 'react'
-import { Alert } from '@blueprintjs/core'
+import PropTypes from 'prop-types'
 import { Cell, Column, Table } from '@blueprintjs/table'
 
-// import GameForm from '../GameForm'
-import PageLoading from '../../../common/components/PageLoading'
-
-export default class GameList extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      loading: true,
-      data: null,
-      error: null
-    }
-    this.db = firebase.firestore()
+export default function GameList({ data }) {
+  function commonCellRenderer(field, rowIndex) {
+    return <Cell>{data[rowIndex][field]}</Cell>
   }
 
-  componentDidMount() {
-    this.query()
+  function arrayCellRenderer(field, rowIndex) {
+    return <Cell>{data[rowIndex][field].join(',')}</Cell>
   }
 
-  query = () => {
-    this.setState({
-      loading: true
-    })
-    this.db
-      .collection('games')
-      .get()
-      .then(querySnapshot => {
-        const data = {}
-        querySnapshot.forEach(doc => {
-          data[doc.id] = doc.data()
-        })
-        this.setState({
-          loading: false,
-          data
-        })
-      })
-      .catch(error => {
-        this.setState({
-          loading: false,
-          error
-        })
-      })
-  }
-
-  retry = () => {
-    this.setState(
-      {
-        error: null
-      },
-      this.query
-    )
-  }
-
-  render() {
-    const { loading, data, error } = this.state
-    if (loading) {
-      return <PageLoading />
-    }
-
-    if (error) {
-      return (
-        <Alert
-          icon="error"
-          canEscapeKeyCancel={false}
-          canOutsideClickCancel={false}
-          confirmButtonText="Retry"
-          onConfirm={this.retry}
-          isOpen
-        >
-          <p>Get Data Failed: {error.toString()}</p>
-        </Alert>
-      )
-    }
+  function editActionCellRenderer(rowIndex) {
     return (
-      <div>
-        <Table numRows={data.length}>
-          {/* <Column name="Dollars" cellRenderer={cellRenderer} /> */}
-        </Table>
-      </div>
+      <Cell>
+        <React.Fragment>
+          <span>Edit</span>
+        </React.Fragment>
+      </Cell>
     )
   }
+
+  const commonFields = ['name', 'releaseDate', 'price', 'developer', 'distributor', 'ageRating']
+  const arrayFields = ['categories', 'supportedPlatforms']
+
+  return (
+    <Table numRows={data.length}>
+      {commonFields.map(field => {
+        return (
+          <Column key={field} name={field} cellRenderer={commonCellRenderer.bind(this, field)} />
+        )
+      })}
+      {arrayFields.map(field => {
+        return (
+          <Column key={field} name={field} cellRenderer={arrayCellRenderer.bind(this, field)} />
+        )
+      })}
+      <Column name="action" cellRenderer={editActionCellRenderer} />
+    </Table>
+  )
+}
+
+GameList.propTypes = {
+  data: PropTypes.array
+}
+
+GameList.defaultProps = {
+  data: []
 }

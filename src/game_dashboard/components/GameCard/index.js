@@ -24,13 +24,13 @@ export default function GameCard() {
         <AwesomeIcon type="xbox" />
         <AwesomeIcon type="nintendo-switch" />
       </div> */}
-      <div className={style.actionGroup}>
+      {/* <div className={style.actionGroup}>
         <ButtonGroup fill minimal>
           <Button className={style.actionBtn} icon="thumbs-up">
             123
           </Button>
         </ButtonGroup>
-      </div>
+      </div> */}
     </Card>
   )
 }

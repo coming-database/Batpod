@@ -4,6 +4,7 @@ import { Schema, Types } from 'schemaor'
 /* prettier-ignore */
 const GameSchema = Schema({
   online: Types().boolean(),
+  price: Types().number(),
   name: Types().string().required(),
   coverUrl: '',
   region: Types().string().required(),

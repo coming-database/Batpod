@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button, ButtonGroup, Tooltip, Position } from '@blueprintjs/core'
-// import { Select } from '@blueprintjs/select'
 import { Grid, Row, Col } from 'react-flexbox-grid'
 
 import GameCard from '../GameCard'

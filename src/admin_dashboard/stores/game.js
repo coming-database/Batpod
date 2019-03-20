@@ -1,6 +1,6 @@
 import { observable, computed, action } from 'mobx'
-import { Toaster, Intent } from '@blueprintjs/core'
 
+import toaster from '../../common/util/toaster'
 import GameSchema from '../../common/schemas/game'
 import REGIONS from '../../common/constants/regions'
 
@@ -66,13 +66,19 @@ export default class Game {
 
   constructor() {
     this.db = firebase.firestore()
-    this.uploadedCoverImageUrls = []
   }
 
   @action
   updateCoverUrl = url => {
     if (this.coverUrl) {
-      this.uploadedCoverImageUrls.push(this.coverUrl)
+      firebase
+        .storage()
+        .refFromURL(this.coverUrl)
+        .delete()
+        .then()
+        .catch(error => {
+          toaster.error(`Delete Uploaded Image Failed: ${error.toString()}`)
+        })
     }
     this.coverUrl = url
   }
@@ -101,18 +107,12 @@ export default class Game {
       .then(docRef => {
         console.log('Document written with ID: ', docRef.id)
         this.loading = false
-        Toaster.create().show({
-          intent: Intent.SUCCESS,
-          message: 'Create Success'
-        })
+        toaster.success('Create Success')
       })
       .catch(error => {
         console.error('Error adding document: ', error)
         this.loading = false
-        Toaster.create().show({
-          intent: Intent.DANGER,
-          message: `Create Falied: ${error.toString()}`
-        })
+        toaster.error(`Create Falied: ${error.toString()}`)
       })
   }
 

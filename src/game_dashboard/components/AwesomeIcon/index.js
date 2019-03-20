@@ -8,7 +8,6 @@ import epicIconImage from './epic.png'
 
 export default function AwesomeIcon(props) {
   const { type = '', prefix = 'fab' } = props
-
   if (type.toLowerCase() === 'origin') {
     return <img alt="origin icon" src={originIconImage} className={style.imageIcon} />
   }
@@ -26,5 +25,5 @@ AwesomeIcon.propTypes = {
 }
 
 AwesomeIcon.defaultProps = {
-  prefix: ''
+  prefix: 'fab'
 }

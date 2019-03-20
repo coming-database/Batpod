@@ -1,30 +1,28 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
+import { Switch, Route, BrowserRouter } from 'react-router-dom'
 
 import LoginForm from '../LoginForm'
-import GameList from '../GameList'
+import GameListContainer from '../GameListContainer'
+import GameForm from '../GameForm'
 import Layout from '../Layout'
+import Demo from '../Demo'
 import PageLoading from '../../../common/components/PageLoading'
 
 import '../../../common/styles/main.css'
+import './main.css'
 
 @inject('user')
 @observer
 export default class App extends React.Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
     const {
       user: { email, isInitialLoginChecking }
     } = this.props
 
     if (isInitialLoginChecking) {
-      return (
-        <Layout>
-          <PageLoading />
-        </Layout>
-      )
+      return <PageLoading />
     }
 
     if (!email) {
@@ -32,9 +30,15 @@ export default class App extends React.Component {
     }
 
     return (
-      <Layout>
-        <GameList />
-      </Layout>
+      <BrowserRouter>
+        <Layout>
+          <Switch>
+            <Route path="/" exact component={GameListContainer} />
+            <Route path="/create" component={GameForm} />
+            <Route path="/demo" component={Demo} />
+          </Switch>
+        </Layout>
+      </BrowserRouter>
     )
   }
 }
