@@ -5,6 +5,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom'
 
 import LoginForm from '../LoginForm'
 import GameListContainer from '../GameListContainer'
+import GameEditorContainer from '../GameEditorContainer'
 import GameForm from '../GameForm'
 import Layout from '../Layout'
 import Demo from '../Demo'
@@ -35,6 +36,7 @@ export default class App extends React.Component {
           <Switch>
             <Route path="/" exact component={GameListContainer} />
             <Route path="/create" component={GameForm} />
+            <Route path="/edit/:id" component={GameEditorContainer} />
             <Route path="/demo" component={Demo} />
           </Switch>
         </Layout>

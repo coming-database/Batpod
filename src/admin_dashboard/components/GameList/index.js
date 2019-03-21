@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import { Cell, Column, Table } from '@blueprintjs/table'
 
 export default function GameList({ data }) {
@@ -15,7 +16,9 @@ export default function GameList({ data }) {
     return (
       <Cell>
         <React.Fragment>
-          <span>Edit</span>
+          <span>
+            <Link to={`/edit/${data[rowIndex].id}`}>Edit</Link>
+          </span>
         </React.Fragment>
       </Cell>
     )

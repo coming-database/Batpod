@@ -13,11 +13,13 @@ export default class Game {
 
   @observable online = false
 
+  @observable id = ''
+
   @observable name = ''
 
   @observable coverUrl = ''
 
-  @observable price = ''
+  @observable price = -1
 
   @observable region = REGIONS.US
 
@@ -57,15 +59,30 @@ export default class Game {
     }
   }
 
-  @observable platforms = {}
+  @observable platforms = '{}'
 
   @computed
   get supportedPlatforms() {
-    return Object.keys(this.platforms)
+    return Object.keys(JSON.parse(this.platforms))
   }
 
-  constructor() {
+  constructor(game) {
     this.db = firebase.firestore()
+    console.log(game)
+    if (game) {
+      this.id = game.id
+      this.name = game.name
+      this.online = game.online
+      this.coverUrl = game.coverUrl
+      this.ageRating = game.ageRating
+      this.developer = game.developer
+      this.distributor = game.distributor
+      this.price = game.price
+      this.region = game.region
+      this.releaseDate = game.releaseDate
+      this.platforms = JSON.stringify(game.platforms, null, 2)
+      this.categories = game.categories.join(',')
+    }
   }
 
   @action
@@ -83,11 +100,11 @@ export default class Game {
     this.coverUrl = url
   }
 
-  @action
-  create = () => {
+  assembleData = () => {
     const game = GameSchema({
       online: this.online,
       name: this.name,
+      price: this.price,
       coverUrl: this.coverUrl,
       region: this.region,
       releaseDate: this.releaseDate,
@@ -95,30 +112,64 @@ export default class Game {
       distributor: this.distributor,
       categories: this.categories.split(','),
       ageRating: this.ageRating,
-      platforms: this.platforms,
+      platforms: JSON.parse(this.platforms),
       supportedPlatforms: this.supportedPlatforms
     })
+    console.log(game)
+    return game
+  }
+
+  @action
+  createSave = () => {
+    const game = this.assembleData()
 
     this.loading = true
-    console.log(game)
     this.db
       .collection('games')
       .add(game)
-      .then(docRef => {
-        console.log('Document written with ID: ', docRef.id)
+      .then(() => {
         this.loading = false
         toaster.success('Create Success')
       })
       .catch(error => {
-        console.error('Error adding document: ', error)
         this.loading = false
         toaster.error(`Create Falied: ${error.toString()}`)
       })
   }
 
   @action
-  edit = () => {}
+  editSave = () => {
+    const game = this.assembleData()
+
+    this.loading = true
+    firebase
+      .database()
+      .ref(`games/${this.id}`)
+      .set(game)
+      .then(() => {
+        this.loading = false
+        toaster.success('Edit Success')
+      })
+      .catch(error => {
+        this.loading = false
+        toaster.error(`Create Falied: ${error.toString()}`)
+      })
+  }
 
   @action
-  deleteGame = () => {}
+  deleteGame = () => {
+    this.loading = true
+    firebase
+      .database()
+      .ref(`games/${this.id}`)
+      .delete()
+      .then(() => {
+        this.loading = false
+        toaster.success('Delete Success')
+      })
+      .catch(error => {
+        this.loading = false
+        toaster.error(`Delete Falied: ${error.toString()}`)
+      })
+  }
 }

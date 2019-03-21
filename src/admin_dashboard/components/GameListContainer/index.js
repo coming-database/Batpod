@@ -1,30 +1,13 @@
 import React from 'react'
 import { Alert } from '@blueprintjs/core'
 
-// import GameForm from '../GameForm'
 import GameList from '../GameList'
 import PageLoading from '../../../common/components/PageLoading'
+import withFirebaseFetch from '../../../common/hocs/withFirebaseFetch'
 
-export default class GameListContainer extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      loading: true,
-      data: null,
-      error: null
-    }
-    this.db = firebase.firestore()
-  }
-
-  componentDidMount() {
-    this.query()
-  }
-
-  query = () => {
-    this.setState({
-      loading: true
-    })
-    this.db
+@withFirebaseFetch({
+  query: db => {
+    return db
       .collection('games')
       .get()
       .then(querySnapshot => {
@@ -35,30 +18,17 @@ export default class GameListContainer extends React.Component {
             ...doc.data()
           })
         })
-        this.setState({
-          loading: false,
-          data
-        })
+        return data
       })
-      .catch(error => {
-        this.setState({
-          loading: false,
-          error
-        })
-      })
+      .catch(error => error)
   }
-
-  retry = () => {
-    this.setState(
-      {
-        error: null
-      },
-      this.query
-    )
-  }
-
+})
+export default class GameListContainer extends React.Component {
   render() {
-    const { loading, error, data } = this.state
+    const {
+      firebaseFetch: { loading, error, data, refetch }
+    } = this.props
+
     if (loading) {
       return <PageLoading />
     }
@@ -70,7 +40,7 @@ export default class GameListContainer extends React.Component {
           canEscapeKeyCancel={false}
           canOutsideClickCancel={false}
           confirmButtonText="Retry"
-          onConfirm={this.retry}
+          onConfirm={refetch}
           isOpen
         >
           <p>Get Data Failed: {error.toString()}</p>

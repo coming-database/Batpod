@@ -30,7 +30,10 @@ const TABS = {
   PLATFORMS: 'PLATFORMS'
 }
 
-@withMobx(new GameStore())
+@withMobx(props => {
+  const { game } = props
+  return new GameStore(game)
+})
 @observer
 export default class GameForm extends React.Component {
   constructor(props) {
@@ -58,7 +61,7 @@ export default class GameForm extends React.Component {
   }
 
   render() {
-    const { store } = this.props
+    const { store, editMode } = this.props
     const { activeTab } = this.state
 
     const {
@@ -76,9 +79,12 @@ export default class GameForm extends React.Component {
       distributor,
       categories,
       ageRating,
+      platforms,
       otherInfoFilledCondition,
 
-      create
+      createSave,
+      editSave,
+      deleteGame
     } = store
     return (
       <div>
@@ -187,7 +193,8 @@ export default class GameForm extends React.Component {
               panel={
                 <div>
                   <TextArea
-                    large={true}
+                    large
+                    value={platforms}
                     intent={Intent.PRIMARY}
                     className={style.platforms}
                     onChange={this.inputChangeHandler.bind(this, 'platforms')}
@@ -214,10 +221,16 @@ export default class GameForm extends React.Component {
               className={style.onlineSwitch}
             />
             <ButtonGroup>
-              <Button icon="trash" intent={Intent.DANGER}>
-                Delete
-              </Button>
-              <Button onClick={create} icon="saved" intent={Intent.PRIMARY}>
+              {editMode && (
+                <Button onClick={deleteGame} icon="trash" intent={Intent.DANGER}>
+                  Delete
+                </Button>
+              )}
+              <Button
+                onClick={editMode ? editSave : createSave}
+                icon="saved"
+                intent={Intent.PRIMARY}
+              >
                 Save
               </Button>
             </ButtonGroup>
@@ -226,8 +239,4 @@ export default class GameForm extends React.Component {
       </div>
     )
   }
-}
-
-GameForm.propTypes = {
-  store: PropTypes.object.isRequired
 }

@@ -42,7 +42,7 @@ export default class ImageUploader extends React.Component {
 
   render() {
     const { loading } = this.state
-    const { value = 'Choose file...' } = this.props
+    const { value } = this.props
     return (
       <div>
         <OverlayLoading />
@@ -57,9 +57,11 @@ export default class ImageUploader extends React.Component {
 }
 
 ImageUploader.propTypes = {
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  value: PropTypes.string
 }
 
 ImageUploader.defaultProps = {
-  onChange: function anonymous() {}
+  onChange: function anonymous() {},
+  value: 'Choose file...'
 }

@@ -9,78 +9,149 @@
     />
     <style>
       
-      body, html {
-        background: #7F7FD5;  /* fallback for old browsers */
-        /* https://uigradients.com/#AzurLane */
-        background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);  /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-      }
-      /* https://loading.io/css/ */
-      .lds-ellipsis {
-        display: inline-block;
+      .db {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
         position: absolute;
-        width: 64px;
-        height: 64px;
         top: 50%;
         left: 50%;
-        transform: translate(-32px, -32px);
+        transform: translate(-60px, -60px);
       }
-      .lds-ellipsis div {
+      .light {
         position: absolute;
-        top: 27px;
-        width: 11px;
-        height: 11px;
+        height: 5px;
+        width: 5px;
+        background: black;
         border-radius: 50%;
-        background: #fff;
-        animation-timing-function: cubic-bezier(0, 1, 1, 0);
       }
-      .lds-ellipsis div:nth-child(1) {
-        left: 6px;
-        animation: lds-ellipsis1 0.6s infinite;
+      .shadow {
+        width: 100px;
+        height: 10px;
+        position: absolute;
+        top: 75px;
+        left: 0px;
+        background: black;
+        /* border-radius: 10% 10% 100% 100%; */
+        box-shadow: 0 5px 50px rgba(0, 0, 0, 0.8);
+        z-index: -1;
       }
-      .lds-ellipsis div:nth-child(2) {
-        left: 6px;
-        animation: lds-ellipsis2 0.6s infinite;
+      /* http://tobiasahlin.com/spinkit/ */
+      .spinner {
+        position: absolute;
+        top: -49px;
+        left: -46px;
+
+        width: 200px;
+        height: 200px;
+        background-color: #333;
+
+        border-radius: 100%;
+        -webkit-animation: sk-scaleout 1s infinite ease-in-out;
+        animation: sk-scaleout 1s infinite ease-in-out;
       }
-      .lds-ellipsis div:nth-child(3) {
-        left: 26px;
-        animation: lds-ellipsis2 0.6s infinite;
-      }
-      .lds-ellipsis div:nth-child(4) {
-        left: 45px;
-        animation: lds-ellipsis3 0.6s infinite;
-      }
-      @keyframes lds-ellipsis1 {
+
+      @-webkit-keyframes sk-scaleout {
         0% {
-          transform: scale(0);
+          -webkit-transform: scale(0);
         }
         100% {
-          transform: scale(1);
-        }
-      }
-      @keyframes lds-ellipsis3 {
-        0% {
-          transform: scale(1);
-        }
-        100% {
-          transform: scale(0);
-        }
-      }
-      @keyframes lds-ellipsis2 {
-        0% {
-          transform: translate(0, 0);
-        }
-        100% {
-          transform: translate(19px, 0);
+          -webkit-transform: scale(1);
+          opacity: 0;
         }
       }
 
+      @keyframes sk-scaleout {
+        0% {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+        }
+        100% {
+          -webkit-transform: scale(1);
+          transform: scale(1);
+          opacity: 0;
+        }
+      }
     </style>
 
   </head>
   
     <div id="app">
-        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+        <div class="db">
+            <div class="spinner"></div>
+            <div
+              style="
+              position:relative;
+              z-index: 10;
+              width: 100px;
+              height: 35px;
+              border: 1px solid black;
+              border-radius: 50%;
+              background: white;
+              "
+            ></div>
+            <div
+              style="
+              position:relative;
+              z-index: 9;
+              width: 100px;
+              height: 40px;
+              bottom: 20px;
+              border: 1px solid black;
+              border-radius: 0 0 50% 50%;
+              background: white;
+            "
+            >
+              <div
+                style="
+                  top: 17px;
+                  left: 88px;
+              "
+                class="light"
+              ></div>
+            </div>
+            <div
+              class="second-layer"
+              style="
+              position:relative;
+              z-index: 8;
+              width: 100px;
+              height: 35px;
+              bottom: 37px;
+              border: 1px solid black;
+              border-radius: 10% 10% 50% 50%;
+              background: white;
+            "
+            >
+              <div
+                style="
+                top: 15px;
+                left: 88px;
+                "
+                class="light"
+              ></div>
+            </div>
+            <div
+              class="third-layer"
+              style="
+              position:relative;
+              z-index: 7;
+              width: 100px;
+              height: 35px;
+              bottom: 53px;
+              border: 1px solid black;
+              border-radius: 10% 10% 50% 50%;
+              background: white;
+            "
+            >
+              <div
+                style="
+            top: 15px;
+            left: 88px;
+            "
+                class="light"
+              ></div>
+            </div>
     </div>
   </body>
 </html>

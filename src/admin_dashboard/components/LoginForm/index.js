@@ -14,6 +14,7 @@ export default class LoginForm extends React.Component {
       password: ''
     }
   }
+
   loginHandler = () => {
     const {
       user: { login }
@@ -21,6 +22,7 @@ export default class LoginForm extends React.Component {
     const { email, password } = this.state
     login(email, password)
   }
+
   render() {
     const { email, password } = this.state
     const {
