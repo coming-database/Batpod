@@ -13,16 +13,26 @@
       }
       .light {
         position: absolute;
-        height: 50px;
-        width: 50px;
+        height: 5px;
+        width: 5px;
         background: black;
+        border-radius: 50%;
+      }
+      .shadow {
+        width: 200px;
+        height: 100px;
+        position: absolute;
+        top: 33px;
+        left: -46px;
+        /* background: black; */
+        background: radial-gradient(black, transparent);
         border-radius: 50%;
       }
       /* https://codepen.io/fskirschbaum/pen/MYJNaj */
       .led-yellow {
         background-color: #ff0;
         border-radius: 50%;
-        box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #ff0 0 2px 12px;
+        box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 1px, #ff0 0 2px 12px;
         /* animation: blinkYellow 1s infinite; */
       }
 
@@ -70,7 +80,7 @@
             top: 17px;
             left: 88px;
         "
-          class="light led-yellow"
+          class="light"
         ></div>
       </div>
       <div
@@ -91,7 +101,7 @@
           top: 15px;
           left: 88px;
           "
-          class="light led-yellow"
+          class="light"
         ></div>
       </div>
       <div
@@ -112,9 +122,10 @@
       top: 15px;
       left: 88px;
       "
-          class="light led-yellow"
+          class="light"
         ></div>
       </div>
+      <div class="shadow"></div>
     </div>
   </body>
 </html>
